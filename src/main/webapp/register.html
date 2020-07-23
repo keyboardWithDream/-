@@ -7,6 +7,148 @@
         <link rel="stylesheet" href="css/register.css">
 		<!--导入jquery-->
 		<script src="js/jquery-3.3.1.js"></script>
+		<script>
+			/*
+			表单校验
+				1.用户名: 单词开头字符, 4到16位（字母，数字，下划线，减号）
+				2.密码: 单词字符, 最少6位，包括至少1个大写字母，1个小写字母，1个数字，1个特殊字符
+				3.email: 邮件格式
+				4.姓名: 非空
+				5.手机号: 手机号格式
+				6.出生日期: 非空
+				7.验证码: 非空
+			 */
+
+			/**
+			 * 校验用户名
+			 */
+			function checkUsername() {
+				//获取用户名
+				const username = $("#username").val();
+				//定义正则
+				const reg_username = /^[a-zA-Z0-9_]{4,16}$/;
+				//判断,给出提示信息
+				const flag = reg_username.test(username);
+				if (flag){
+					$("#username").css("border", "");
+				}else {
+					$("#username").css("border", "1px solid red");
+				}
+				return flag;
+			}
+
+			/**
+			 * 校验密码
+			 */
+			function checkPassword(){
+				//获取用户名
+				const password = $("#password").val();
+				//定义正则
+				const reg_password = /^.*(?=.{6,})(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[!@#$%^&*? ]).*$/;
+				//判断,给出提示信息
+				const flag = reg_password.test(password);
+				if (flag){
+					$("#password").css("border", "");
+				}else {
+					$("#password").css("border", "1px solid red");
+				}
+				return flag;
+			}
+
+			/**
+			 * 校验邮箱
+			 */
+			function checkEmail(){
+				const email = $("#email").val();
+				const reg_email = /^([a-zA-Z\d])(\w|\-)+@[a-zA-Z\d]+\.[a-zA-Z]{2,4}$/;
+				const flag = reg_email.test(email);
+				if (flag){
+					$("#email").css("border", "");
+				}else {
+					$("#email").css("border", "1px solid red");
+				}
+				return flag;
+			}
+
+			/**
+			 * 姓名校验
+			 */
+			function checkName(){
+				const name = $("#name").val();
+				const reg_name = /^[\u2E80-\u9FFF]+$/;
+				const flag = reg_name.test(name);
+				if (flag){
+					$("#name").css("border", "");
+				}else {
+					$("#name").css("border", "1px solid red");
+				}
+				return flag;
+			}
+
+
+			/**
+			 * 手机号校验
+			 */
+			function checkPhone(){
+				const phone = $("#telephone").val();
+				const reg_phone = /^1[3-9]\d{9}$/;
+				const flag = reg_phone.test(phone);
+				if (flag){
+					$("#telephone").css("border", "");
+				}else {
+					$("#telephone").css("border", "1px solid red");
+				}
+				return flag;
+			}
+
+			/**
+			 * 验证生日
+			 */
+			function checkBirthday(){
+				const birthday = $("birthday").val();
+				if (birthday == ""){
+					$("#birthday").css("border", "1px solid red");
+					return false;
+				}else {
+					$("#birthday").css("border");
+					return true;
+				}
+			}
+
+			function checkCode(){
+				const code = $("#check").val();
+				if (code == ""){
+					$("#check").css("border", "1px solid red");
+					return false;
+				}else {
+					$("#check").css("border", "");
+					return true;
+				}
+			}
+
+			$(function () {
+
+				/**
+				 * 提交表单验证
+				 */
+				$("#registerForm").submit(function () {
+					return checkUsername() && checkPassword() && checkEmail() && checkName() && checkPhone() && checkBirthday() && checkCode();
+				});
+
+
+				/**
+				 * 失去焦点校验
+				 */
+				$("#username").blur(checkUsername);
+				$("#password").blur(checkPassword);
+				$("#email").blur(checkEmail);
+				$("#name").blur(checkName);
+				$("#telephone").blur(checkPhone);
+				$("#birthday").blur(checkBirthday);
+				$("#check").blur(checkCode);
+
+			});
+		</script>
     </head>
 	<body>
 	<!--引入头部-->
@@ -21,7 +163,7 @@
     			<div class="rg_form_center">
 					
 					<!--注册表单-->
-    				<form id="registerForm">
+    				<form id="registerForm" action="register" method="post">
 						<!--提交处理请求的标识符-->
 						<input type="hidden" name="action" value="register">
     					<table style="margin-top: 25px;">
