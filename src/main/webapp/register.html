@@ -132,7 +132,18 @@
 				 * 提交表单验证
 				 */
 				$("#registerForm").submit(function () {
-					return checkUsername() && checkPassword() && checkEmail() && checkName() && checkPhone() && checkBirthday() && checkCode();
+					if (checkUsername() && checkPassword() && checkEmail() && checkName() && checkPhone() && checkBirthday() && checkCode()){
+						$.post("registerUserServlet", $(this).serialize(),function (data) {
+							if (data.flag){
+								location.href = "register_ok.html";
+							}else {
+								//$("#error_msg").css("display", "block");
+								$("#error_msg").html(data.errorMsg);
+							}
+						});
+					}else {
+						return false;
+					}
 				});
 
 
@@ -163,7 +174,8 @@
     			<div class="rg_form_center">
 					
 					<!--注册表单-->
-    				<form id="registerForm" action="register" method="post">
+					<div id="error_msg" style="color: red; text-align: center">Test</div>
+    				<form id="registerForm">
 						<!--提交处理请求的标识符-->
 						<input type="hidden" name="action" value="register">
     					<table style="margin-top: 25px;">
