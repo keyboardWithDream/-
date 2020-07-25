@@ -10,14 +10,27 @@
     <link rel="stylesheet" type="text/css" href="css/login.css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
       <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
       <!--导入angularJS文件-->
     <script src="js/angular.min.js"></script>
 	<!--导入jquery-->
 	<script src="js/jquery-3.3.1.js"></script>
+
+	<script>
+		$(function () {
+			$("#btn_sub").click(function () {
+				$.post("loginUserServlet", $("#loginForm").serialize(), function (data) {
+					const flag = data.flag;
+					if (flag){
+						location.href = "index.html";
+					}else {
+						$("#errorMsg").html(data.errorMsg);
+					}
+				});
+			});
+		});
+	</script>
 </head>
 
 <body>
@@ -52,7 +65,7 @@
 					</script>
 			</div>
 			<div class="submit_btn">
-        				<button type="button">登录</button>
+        				<button type="button" id="btn_sub">登录</button>
         				<div class="auto_login">
         					<input type="checkbox" name="" class="checkbox">
         					<span>自动登录</span>

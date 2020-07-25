@@ -21,7 +21,9 @@ public class UserServiceImpl implements UserService {
             user.setCode(UuidUtil.getUuid());
             user.setStatus("N");
             dao.save(user);
-            String content = "<a href='http://localhost/travel/activeUserServlet?code="+ user.getCode() +"'>点击激活[旅游网]</a>";
+            String content = "欢迎"+user.getUsername()+"的注册！\n" +
+                    "如果是您本人请<a href='http://localhost/travel/activeUserServlet?code="+ user.getCode() +"'>点击激活[旅游网]</a>\n" +
+                    "如果不是，请忽略此邮件";
             MailUtils.sendMail(user.getEmail(),content,"旅游网邮件激活");
             return true;
         }else {
@@ -36,8 +38,13 @@ public class UserServiceImpl implements UserService {
             return false;
         }else {
             dao.updateStatus(result);
-            MailUtils.sendMail(result.getEmail(),"您以成功激活, 欢迎注册!", "账号激活成功");
+            MailUtils.sendMail(result.getEmail(),"您已成功激活, 欢迎注册!\n感谢"+result.getUsername()+"的支持！", "账号激活成功");
             return true;
         }
+    }
+
+    @Override
+    public User login(User user) {
+        return dao.findUserByUsernameAndPassword(user.getUsername(), user.getPassword());
     }
 }

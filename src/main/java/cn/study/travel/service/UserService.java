@@ -21,4 +21,11 @@ public interface UserService {
      * @return 是否成功
      */
     public boolean activeUser(String code);
+
+    /**
+     * 用户登录
+     * @param user 用户填写的信息
+     * @return 用户对象
+     */
+    public User login(User user);
 }
