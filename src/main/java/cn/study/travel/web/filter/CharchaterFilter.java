@@ -23,11 +23,13 @@ public class CharchaterFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) resp;
 
         String method = request.getMethod();
+        System.out.println(method);
 
-        if (method.equalsIgnoreCase("post")){
+        if ("POST".equalsIgnoreCase(method)){
             request.setCharacterEncoding("utf-8");
         }
 
+        response.setContentType("text/html; charset=UTF-8");
         chain.doFilter(request, response);
     }
 

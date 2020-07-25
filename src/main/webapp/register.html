@@ -137,13 +137,12 @@
 							if (data.flag){
 								location.href = "register_ok.html";
 							}else {
-								//$("#error_msg").css("display", "block");
+								$("#error_msg").css("display", "block");
 								$("#error_msg").html(data.errorMsg);
 							}
 						});
-					}else {
-						return false;
 					}
+					return false;
 				});
 
 
@@ -174,7 +173,7 @@
     			<div class="rg_form_center">
 					
 					<!--注册表单-->
-					<div id="error_msg" style="color: red; text-align: center">Test</div>
+					<div id="error_msg" style="color: red; text-align: center; display: none">Test</div>
     				<form id="registerForm">
 						<!--提交处理请求的标识符-->
 						<input type="hidden" name="action" value="register">

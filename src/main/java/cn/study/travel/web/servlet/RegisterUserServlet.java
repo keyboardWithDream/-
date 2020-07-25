@@ -56,7 +56,7 @@ public class RegisterUserServlet extends HttpServlet {
             info.setFlag(true);
         }else {
             info.setFlag(false);
-            info.setErrorMsg("注册失败!");
+            info.setErrorMsg("注册失败");
         }
 
         ObjectMapper mapper = new ObjectMapper();
