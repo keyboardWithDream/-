@@ -14,4 +14,11 @@ public interface UserService {
      * @return 是否成功
      */
     public boolean register(User user);
+
+    /**
+     * 用户激活
+     * @param code 激活码
+     * @return 是否成功
+     */
+    public boolean activeUser(String code);
 }

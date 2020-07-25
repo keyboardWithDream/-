@@ -12,12 +12,12 @@ public final class MailUtils {
     /**
      * 发件人称号，同邮箱地址
      */
-    private static final String USER = "";
+    private static final String USER = "1353662613@qq.com";
 
     /**
      * 如果是qq邮箱可以使户端授权码，或者登录密码
      */
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "kgotlibqyvargghb";
 
     /**
      *
@@ -75,7 +75,7 @@ public final class MailUtils {
     }
 
     public static void main(String[] args) throws Exception { // 做测试用
-        MailUtils.sendMail("itcast_xian@163.com","你好，这是一封测试邮件，无需回复。","测试邮件");
+        MailUtils.sendMail("1353662613@qq.com","你好，这是一封测试邮件，无需回复。","测试邮件");
         System.out.println("发送成功");
     }
 

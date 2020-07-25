@@ -106,7 +106,7 @@
 			 */
 			function checkBirthday(){
 				const birthday = $("birthday").val();
-				if (birthday == ""){
+				if (birthday === ""){
 					$("#birthday").css("border", "1px solid red");
 					return false;
 				}else {
@@ -117,7 +117,7 @@
 
 			function checkCode(){
 				const code = $("#check").val();
-				if (code == ""){
+				if (code === ""){
 					$("#check").css("border", "1px solid red");
 					return false;
 				}else {
