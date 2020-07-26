@@ -133,7 +133,7 @@
 				 */
 				$("#registerForm").submit(function () {
 					if (checkUsername() && checkPassword() && checkEmail() && checkName() && checkPhone() && checkBirthday() && checkCode()){
-						$.post("registerUserServlet", $(this).serialize(),function (data) {
+						$.post("user/register", $(this).serialize(),function (data) {
 							if (data.flag){
 								location.href = "register_ok.html";
 							}else {

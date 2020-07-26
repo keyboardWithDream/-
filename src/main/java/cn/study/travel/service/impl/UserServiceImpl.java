@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
             user.setStatus("N");
             dao.save(user);
             String content = "欢迎"+user.getUsername()+"的注册！\n" +
-                    "如果是您本人请<a href='http://localhost/travel/activeUserServlet?code="+ user.getCode() +"'>点击激活[旅游网]</a>\n" +
+                    "如果是您本人请<a href='http://localhost/travel/user/active?code="+ user.getCode() +"'>点击激活[旅游网]</a>\n" +
                     "如果不是，请忽略此邮件";
             MailUtils.sendMail(user.getEmail(),content,"旅游网邮件激活");
             return true;

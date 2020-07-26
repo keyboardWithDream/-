@@ -20,7 +20,7 @@
 	<script>
 		$(function () {
 			$("#btn_sub").click(function () {
-				$.post("loginUserServlet", $("#loginForm").serialize(), function (data) {
+				$.post("user/login", $("#loginForm").serialize(), function (data) {
 					const flag = data.flag;
 					if (flag){
 						location.href = "index.html";
