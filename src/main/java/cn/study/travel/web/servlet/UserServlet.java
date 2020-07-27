@@ -97,7 +97,6 @@ public class UserServlet extends BaseServlet {
 
     public void find(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute("user");
-        System.out.println(user);
         ObjectMapper mapper = new ObjectMapper();
         resp.setContentType("application/json; charset=UTF-8");
         mapper.writeValue(resp.getOutputStream(), user);
