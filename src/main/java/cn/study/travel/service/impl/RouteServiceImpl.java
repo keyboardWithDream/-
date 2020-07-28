@@ -17,11 +17,11 @@ public class RouteServiceImpl implements RouteService {
     RouteDao dao = new RouteDaoImpl();
 
     @Override
-    public PageBean<Route> getPageBean(int cid, int currentPage, int pageSize) {
-        int totalCount = dao.getTotalCount(cid);
+    public PageBean<Route> getPageBean(int cid, int currentPage, int pageSize, String rname) {
+        int totalCount = dao.getTotalCount(cid, rname);
         int totalPage = totalCount % pageSize == 0 ? totalCount / pageSize : totalCount / pageSize + 1;
         int start = (currentPage - 1) * pageSize;
-        List<Route> routeList = dao.findByPage(cid, start, pageSize);
+        List<Route> routeList = dao.findByPage(cid, start, pageSize, rname);
         PageBean<Route> pageBean = new PageBean<>(totalCount, totalPage, currentPage, pageSize, routeList);
         return pageBean;
     }

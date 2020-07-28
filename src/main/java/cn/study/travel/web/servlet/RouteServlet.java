@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 /**
  * @author Harlan
@@ -32,6 +33,12 @@ public class RouteServlet extends BaseServlet {
         String currentPageStr = req.getParameter("currentPage");
         String pageSizeStr = req.getParameter("pageSize");
         String cidStr = req.getParameter("cid");
+        String rname = req.getParameter("rname");
+        try {
+            rname = new String(rname.getBytes("ISO-8859-1"), "UTF-8");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         int cid = 0;
         if (cidStr != null && cidStr.length() > 0){
@@ -50,7 +57,8 @@ public class RouteServlet extends BaseServlet {
             pageSize = 5;
         }
 
-        PageBean<Route> pageBean = service.getPageBean(cid, currentPage, pageSize);
+        System.out.println(rname);
+        PageBean<Route> pageBean = service.getPageBean(cid, currentPage, pageSize, rname);
         try {
             writeValue(pageBean, resp);
         } catch (IOException e) {

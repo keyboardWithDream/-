@@ -11,12 +11,16 @@
     <script src="js/jquery-3.3.1.js"></script>
     <script>
         $(function () {
-            const cid = location.search.split("=")[1];
-            load(cid, 1);
+            let cid = getParameter("cid");
+            let rname = getParameter("rname");
+            if (rname){
+                rname = window.decodeURIComponent(rname);
+            }
+            load(cid, 1, rname);
         });
 
-        function load(cid, currentPage) {
-            $.get("route/pageQuery", {cid: cid, currentPage: currentPage}, function (pageBean) {
+        function load(cid, currentPage, rname) {
+            $.get("route/pageQuery", {cid: cid, currentPage: currentPage, rname: rname}, function (pageBean) {
                 const routeList = pageBean.list;
                 $("#totalPage_s").html(pageBean.totalPage);
                 $("#totalCount_s").html(pageBean.totalCount);
